@@ -26,4 +26,8 @@ class User < ApplicationRecord
     return "#{first_name} #{last_name}" if first_name || last_name
     "Anonymous"
   end
+
+  def self.check_db(name)
+    find_by(first_name: name) || find_by(email: name)
+  end
 end
