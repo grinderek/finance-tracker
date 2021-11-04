@@ -27,7 +27,30 @@ class User < ApplicationRecord
     "Anonymous"
   end
 
-  def self.check_db(name)
-    find_by(first_name: name) || find_by(email: name)
+  def self.search(param)
+    param.strip!
+    to_send = (first_name(param) + last_name(param) + email(param)).uniq
+    return nil unless to_send
+    to_send
+  end
+
+  def self.first_name(param)
+    matches("first_name", param)
+  end
+
+  def self.last_name(param)
+    matches("last_name", param)
+  end
+
+  def self.email(param)
+    matches("email", param)
+  end
+
+  def self.matches(field_name, param)
+    where("#{field_name} like ?", "%#{param}%")
+  end
+
+  def except_current_user(users)
+    users.reject { |user| user.id == self.id }
   end
 end
