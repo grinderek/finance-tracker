@@ -16,7 +16,7 @@
         <% unless current_user.under_stock_limit? %>
           10 stocks
         <% end %>
-        <% unless current_user.stock_already_tracked?(@stock.ticker) %>
+        <% if current_user.stock_already_tracked?(@stock.ticker) %>
           this stock
         <% end %>
         </span>
