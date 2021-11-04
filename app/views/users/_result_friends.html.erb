@@ -7,5 +7,7 @@
     <strong>Email: </strong> <%= @friend.email %>
     <strong>First name: </strong> <%= @friend.first_name %>
     <strong>Second name: </strong> <%= @friend.last_name %>
+    <%= link_to "Follow friend", user_stocks_path(user: current_user, ticker: @friend),
+                class: "btn btn-xs btn-success", method: :post %>
   </div>
 <% end %>
